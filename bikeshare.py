@@ -215,7 +215,8 @@ def see_data(df):
         if see_data.lower() != 'yes':
             break
         else:
-            for record in df.head(8).to_dict('records'):
+            records = df.head(8).to_dict('records')
+            for record in records:
                 # print data in nice format
                 print("{")
                 print_pretty(record)
@@ -224,8 +225,8 @@ def see_data(df):
 
 def print_pretty(d, indent=0):
     """ print data in easily readable way """
-   for key, value in d.items():
-      print("  {}: {}".format(key, value))
+    for key, value in d.items():
+        print("  {}: {}".format(key, value))
 
 if __name__ == "__main__":
 	main()
