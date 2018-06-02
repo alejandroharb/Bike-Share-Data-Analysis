@@ -40,7 +40,7 @@ def get_filters():
             break
 
     print('-'*40)
-    return city, month, day
+    return city.lower(), month.lower(), day.lower()
 
 
 def load_data(city, month, day):
@@ -145,11 +145,12 @@ def trip_duration_stats(df):
 
     start_time = time.time()
 
-    # display total travel time
-    print('\nTotal travel time is: {}.'.format(df['Trip Duration'].sum()))
+    # display total travel time in different units
+    travel_time_total_seconds = round(df['Trip Duration'].sum(),2)
+    print('\nTotal travel time is: \n{} seconds, \n{} minutes, \n{} hours.'.format(travel_time_total_seconds, travel_time_total_seconds/60, travel_time_total_seconds/3600))
 
     # display mean travel time
-    print('\nThe travel time MEAN is: {}.'.format(df['Trip Duration'].mean()))
+    print('\nThe travel time MEAN is: {} seconds.'.format(round(df['Trip Duration'].mean(), 2)))
 
     print_times(start_time)
 
@@ -172,8 +173,8 @@ def user_stats(df, city):
         print('\nCounts of genders: \n', gender_counts)
         # Display earliest, most recent, and most common year of birth
         common_birth_year = int(df['Birth Year'].mode()[0])
-        recent_birth_year = int(df['Birth Year'].iloc[-1])
-        earliest_birth_year = int(df['Birth Year'].iloc[0])
+        recent_birth_year = int(df['Birth Year'].max())
+        earliest_birth_year = int(df['Birth Year'].min())
         print('\nMost common year of birth: {}'.format(common_birth_year))
         print('\nMost recent year of birth: {}'.format(recent_birth_year))
         print('\nEarliest year of birth data entry: {}'.format(earliest_birth_year))
